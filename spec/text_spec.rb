@@ -6,7 +6,7 @@ describe 'Text' do
     psd.parse!
 
     text = psd.tree.children.first.text
-    text.should be_an_instance_of(Hash)
+    expect(text).to be_an_instance_of(Hash)
     expect(text[:value]).to eq('Test')
   end
 

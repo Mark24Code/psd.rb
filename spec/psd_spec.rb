@@ -11,12 +11,12 @@ describe 'PSD' do
 
   it 'should raise an exception if using open without a block' do
     expect {
-      PSD.open(filename)  
-    }.to raise_error
+      PSD.open(filename)
+    }.to raise_error(RuntimeError, 'Must supply a block. Otherwise, use PSD.new.')
   end
 
   it 'should refuse to open a bad filename' do
-    expect { PSD.open('') }.to raise_error
+    expect { PSD.new('') }.to raise_error(Errno::ENOENT)
   end
 
   it 'should open a file and feed it to a block' do
@@ -26,12 +26,10 @@ describe 'PSD' do
     end
   end
 
-  # We have to use #should syntax here because the DSL binds
-  # the block to the PSD instance.
   it 'should open a file and feed it to a block DSL style' do
-    PSD.open(filename) do
-      parsed?.should == true
-      is_a?(PSD).should == true
+    PSD.open(filename) do |psd|
+      expect(psd.parsed?).to eq(true)
+      expect(psd.is_a?(PSD)).to eq(true)
     end
   end
 end
