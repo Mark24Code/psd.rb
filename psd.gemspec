@@ -12,20 +12,21 @@ Gem::Specification.new do |gem|
   gem.summary       = %q{General purpose library for parsing Photoshop files}
   gem.homepage      = "http://cosmos.layervault.com/psdrb.html"
   gem.license       = 'MIT'
+  gem.required_ruby_version = '>= 3.0'
 
   gem.files         = `git ls-files`.split($/).delete_if { |f| f.include?('examples/') }
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
 
-  gem.add_dependency 'rake'
+  gem.add_dependency 'rake', '~> 13.0'
   gem.add_dependency 'psd-enginedata', '~> 1'
-  gem.add_dependency 'chunky_png'
-  gem.add_dependency 'xmp'
+  gem.add_dependency 'chunky_png', '~> 1.4'
+  gem.add_dependency 'xmp', '~> 2.0'
 
   gem.test_files = Dir.glob("spec/**/*")
-  gem.add_development_dependency 'rspec'
-  gem.add_development_dependency 'guard'
-  gem.add_development_dependency 'guard-rspec'
+  gem.add_development_dependency 'rspec', '~> 3.13'
+  gem.add_development_dependency 'guard', '~> 2.19'
+  gem.add_development_dependency 'guard-rspec', '~> 4.7'
   gem.add_development_dependency 'rb-fsevent', '~> 0.9'
 end
