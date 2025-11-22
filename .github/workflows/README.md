@@ -62,9 +62,21 @@ end
 gem sources --add https://rubygems.pkg.github.com/YOUR_USERNAME/
 ```
 
-### 认证
+### 权限配置
 
-工作流使用自动生成的 `GITHUB_TOKEN` 进行认证，无需额外配置。
+工作流需要以下权限：
+- `contents: write` - 用于创建 GitHub Release
+- `packages: write` - 用于发布到 GitHub Packages
+- `id-token: write` - 用于认证
+
+这些权限已在工作流中配置，使用自动生成的 `GITHUB_TOKEN`，无需额外配置。
+
+### 故障排除
+
+如果遇到 Release 创建失败（403 错误），请确保：
+1. 工作流有足够的权限（已在配置中设置）
+2. 标签名称格式正确（以 'v' 开头）
+3. 仓库设置允许 Actions 创建 Release
 
 ### 版本管理建议
 
